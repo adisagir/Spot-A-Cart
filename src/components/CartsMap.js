@@ -6,6 +6,8 @@ import {
   InfoWindow
 } from "@react-google-maps/api";
 import FoodTruckIcon from "../foodTruck.png";
+import ReviewFormModal from "./ReviewFormModal";
+import ReviewForm from "./ReviewForm";
 
 const cartAPI = "http://localhost:3000/carts";
 
@@ -15,7 +17,10 @@ export default class CartsMap extends Component {
     selectedPlace: {},
     activeMarker: {},
     showingInfoWindow: false,
-    cuisine: ""
+    cuisine: "",
+    modalShow: false,
+    reviews: this.props.reviews,
+    cartReviews: []
   };
 
   componentDidMount() {
@@ -29,7 +34,6 @@ export default class CartsMap extends Component {
   }
 
   onMarkerClick = (props, marker, e) => {
-    console.log(this.props.current_user);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -49,10 +53,16 @@ export default class CartsMap extends Component {
   onClose = props => {
     if (this.state.showingInfoWindow) {
       this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
+        showingInfoWindow: false
+        // activeMarker: null
       });
     }
+  };
+
+  setModalShow = boolean => {
+    this.setState({
+      modalShow: boolean
+    });
   };
 
   render() {
@@ -60,7 +70,6 @@ export default class CartsMap extends Component {
       return (
         <Marker
           onLoad={marker => {
-            console.log("marker: ", marker);
           }}
           position={{
             lat: parseFloat(cart.latitude),
@@ -68,17 +77,28 @@ export default class CartsMap extends Component {
           }}
           onClick={e => {
             this.onMarkerClick(e, cart);
+            if (this.state.reviews) {
+              let cartReviews = this.state.reviews.filter(
+                review => review.cart_id === cart.id
+              );
+              this.setState({
+                cartReviews: cartReviews
+              });
+            }
           }}
           icon={FoodTruckIcon}
         />
       );
     });
-    console.log(this.state.activeMarker);
     return (
       <div>
         <h1>Welcome, {this.props.name}!</h1>
-        <br />
-        <img src={this.props.image} height="200px" width="200px"></img>
+        <img
+          src={this.props.image}
+          height="200px"
+          width="200px"
+          alt="Profile"
+        />
         <br />
         <button onClick={() => this.props.logOut(this.props.history)}>
           Log Out
@@ -119,7 +139,7 @@ export default class CartsMap extends Component {
                     <a
                       href={this.state.activeMarker.website_url}
                       target="_blank"
-                      rel="noopener no referrer"
+                      rel="noopener noreferrer"
                     >
                       Website
                     </a>
@@ -130,9 +150,39 @@ export default class CartsMap extends Component {
                     height="200px"
                     width="200px"
                   />
+                  <br />
+                  <h4>
+                    {this.state.cartReviews.length > 0
+                      ? this.state.cartReviews.map(
+                          cartReview => cartReview.stars
+                        )
+                      : null}
+                  </h4>
+                  <h4>
+                    {this.state.cartReviews.map(
+                      cartReview => cartReview.content
+                    )}
+                  </h4>
+                  <button onClick={() => this.setModalShow(true)}>
+                    Add Review
+                  </button>
+                  <ul>
+                    {
+                      this.state.activeMarker.reviews.map(review => <li>{review.content}: {review.stars} ⭐️'s</li>)
+                    }
+                  </ul>
                 </div>
               </InfoWindow>
             ) : null}
+            <ReviewFormModal
+              user_id={this.props.current_user.id}
+              cart_id={this.state.activeMarker.id}
+              name={this.state.activeMarker.name}
+              show={this.state.modalShow}
+              onHide={() => this.setModalShow(false)}
+            />
+            <ReviewForm user_id={this.props.current_user.id}
+            cart_id={this.state.activeMarker.id} />
           </GoogleMap>
         </LoadScript>
       </div>

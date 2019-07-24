@@ -1,6 +1,6 @@
 import React from "react";
 
-class SignupPage extends React.Component {
+export default class SignupPage extends React.Component {
   state = {
     name: "",
     username: "",
@@ -88,5 +88,3 @@ class SignupPage extends React.Component {
     );
   }
 }
-
-export default SignupPage;

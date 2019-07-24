@@ -10,14 +10,14 @@ import LoginPage from "./components/LoginPage";
 import CartsMap from "./components/CartsMap";
 import SignupPage from "./components/SignupPage";
 
-const cartAPI = "http://localhost:3000/carts";
 const profileAPI = "http://localhost:3000/profile";
+const reviewAPI = "http://localhost:3000/reviews";
 
 export default class App extends React.Component {
   state = {
     loggedIn: false,
     current_user: {},
-    reviews: []
+    // reviews: []
   };
 
   componentDidMount() {
@@ -40,6 +40,12 @@ export default class App extends React.Component {
           });
         });
     }
+    // --- fetch all the reviews and set to current state ---
+    // fetch(reviewAPI)
+    //   .then(resp => resp.json())
+    //   .then(allReviews => {
+    //     this.setState({ reviews: allReviews });
+    //   });
   };
 
   // --- User can log in or log out ---
@@ -70,7 +76,8 @@ export default class App extends React.Component {
               {...routerProps}
               logOut={this.logOut}
               name={this.state.current_user.name}
-              image={this.state.current_user.image_url}
+              image={this.state.current_user.picture}
+              review={this.state.reviews}
             />
           )}
         />
