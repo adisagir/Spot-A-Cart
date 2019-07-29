@@ -2,32 +2,55 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.loginButton,
+.signupButton {
+  -moz-box-shadow: 0px 10px 14px -7px #276873;
+  -webkit-box-shadow: 0px 10px 14px -7px #276873;
+  box-shadow: 0px 10px 14px -7px #276873;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0.05, #59b36b),
+    color-stop(1, #408c99)
+  );
+  background: -moz-linear-gradient(top, #59b36b 5%, #408c99 100%);
+  background: -webkit-linear-gradient(top, #59b36b 5%, #408c99 100%);
+  background: -o-linear-gradient(top, #59b36b 5%, #408c99 100%);
+  background: -ms-linear-gradient(top, #59b36b 5%, #408c99 100%);
+  background: linear-gradient(to bottom, #59b36b 5%, #408c99 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#59b36b', endColorstr='#408c99',GradientType=0);
+  background-color: #59b36b;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 14px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #3d768a;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.myButton:hover {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0.05, #408c99),
+    color-stop(1, #59b36b)
+  );
+  background: -moz-linear-gradient(top, #408c99 5%, #59b36b 100%);
+  background: -webkit-linear-gradient(top, #408c99 5%, #59b36b 100%);
+  background: -o-linear-gradient(top, #408c99 5%, #59b36b 100%);
+  background: -ms-linear-gradient(top, #408c99 5%, #59b36b 100%);
+  background: linear-gradient(to bottom, #408c99 5%, #59b36b 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#59b36b',GradientType=0);
+  background-color: #408c99;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.myButton:active {
+  position: relative;
+  top: 1px;
 }

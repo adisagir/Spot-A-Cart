@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
+import "../App.css";
 
-export default class LoginPage extends React.Component {
+export default class LoginPage extends Component {
   state = {
     username: "",
     password: ""
@@ -12,10 +13,9 @@ export default class LoginPage extends React.Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.token}`
+        Accept: "application/json"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(this.state) 
     })
       .then(res => res.json())
       .then(data => {
@@ -73,12 +73,7 @@ export default class LoginPage extends React.Component {
               placeholder="Password"
             />
             <br />
-            <input type="submit" value="Log In" />
-            <br />
-            Or
-            <button onClick={() => this.props.history.push("/signup")}>
-              Sign Up
-            </button>
+            <input type="submit" value="Log In" className="loginButton" /> Or <button onClick={() => this.props.history.push("/signup")}className="signupButton">Sign Up</button>
           </form>
         </div>
       </div>

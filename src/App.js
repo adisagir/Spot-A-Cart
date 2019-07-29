@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from "react";
 import "./App.css";
 import {
@@ -11,13 +12,11 @@ import CartsMap from "./components/CartsMap";
 import SignupPage from "./components/SignupPage";
 
 const profileAPI = "http://localhost:3000/profile";
-const reviewAPI = "http://localhost:3000/reviews";
 
 export default class App extends React.Component {
   state = {
     loggedIn: false,
-    current_user: {},
-    // reviews: []
+    current_user: {}
   };
 
   componentDidMount() {
@@ -40,12 +39,6 @@ export default class App extends React.Component {
           });
         });
     }
-    // --- fetch all the reviews and set to current state ---
-    // fetch(reviewAPI)
-    //   .then(resp => resp.json())
-    //   .then(allReviews => {
-    //     this.setState({ reviews: allReviews });
-    //   });
   };
 
   // --- User can log in or log out ---

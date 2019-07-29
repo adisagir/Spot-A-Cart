@@ -1,6 +1,6 @@
-import React, { Component } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import React, { Component } from "react";
 import ReviewForm from "./ReviewForm";
 
 export default class ReviewFormModal extends Component {
@@ -19,8 +19,11 @@ export default class ReviewFormModal extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ReviewForm user_id={this.props.user_id}
-            cart_id={this.props.cart_id}/>
+            <ReviewForm
+              user_id={this.props.user_id}
+              cart_id={this.props.cart_id}
+              addReview={this.props.addReview}
+            />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.onHide}>Close</Button>

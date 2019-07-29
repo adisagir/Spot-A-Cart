@@ -10,6 +10,7 @@ export default class ReviewForm extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
+    console.log(this.props)
     fetch(reviewAPI, {
       method: "POST",
       headers: {
@@ -23,19 +24,18 @@ export default class ReviewForm extends Component {
         content: this.state.content,
         stars: this.state.stars
       })
-    });
-
+    }).then(res => res.json())
+      .then(data => this.props.addReview(data))
   };
 
   handleFormChange = e => {
-    console.log(this.props.user_id, this.props.cart_id)
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
   render() {
-    console.log(this.props.user_id, this.props.cart_id)
+    console.log(this.props)
     const star = "⭐️";
     return (
       <div>

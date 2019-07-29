@@ -45,7 +45,7 @@ export default class ProfilePage extends Component {
 
   render() {
     return (
-      <div className="cartShow">
+      <div className="userProfile">
         {this.state.edit ? (
           <div>
             <form onSubmit={this.handleEditSubmit}>

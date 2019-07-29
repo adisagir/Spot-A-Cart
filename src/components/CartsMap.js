@@ -8,6 +8,7 @@ import {
 import FoodTruckIcon from "../foodTruck.png";
 import ReviewFormModal from "./ReviewFormModal";
 import ReviewForm from "./ReviewForm";
+import DisplayReview from "./DisplayReview";
 
 const cartAPI = "http://localhost:3000/carts";
 
@@ -19,7 +20,6 @@ export default class CartsMap extends Component {
     showingInfoWindow: false,
     cuisine: "",
     modalShow: false,
-    reviews: this.props.reviews,
     cartReviews: []
   };
 
@@ -65,24 +65,40 @@ export default class CartsMap extends Component {
     });
   };
 
+  getAvgStars = () => {
+    let reviewStars = this.state.activeMarker.reviews.map(
+      review => review.stars
+    );
+    let total = reviewStars.reduce((acc, c) => acc + c, 0);
+    if (total) {
+      let avg = (total / reviewStars.length).toFixed(0);
+       return " ⭐".repeat(avg)
+    } else {
+      return <i>This cart does not have any ratings. Add your review!</i>;
+    }
+  };
+
+  onReviewFormSubmit = (review) => {
+    this.setState({
+      cartReviews: [...this.state.activeMarker.reviews, review],
+      modalShow: false
+    })
+  }
+
   render() {
     let newMarkers = this.state.carts.map(cart => {
       return (
         <Marker
-          onLoad={marker => {
-          }}
+          onLoad={marker => {}}
           position={{
             lat: parseFloat(cart.latitude),
             lng: parseFloat(cart.longitude)
           }}
           onClick={e => {
             this.onMarkerClick(e, cart);
-            if (this.state.reviews) {
-              let cartReviews = this.state.reviews.filter(
-                review => review.cart_id === cart.id
-              );
+            if (this.state.activeMarker.reviews) {
               this.setState({
-                cartReviews: cartReviews
+                cartReviews: this.state.activeMarker.reviews
               });
             }
           }}
@@ -132,6 +148,7 @@ export default class CartsMap extends Component {
               >
                 <div>
                   <h3>{this.state.activeMarker.name}</h3>
+                  {this.getAvgStars()}
                   <h4>
                     <i>Cuisine: {this.state.cuisine}</i>
                   </h4>
@@ -151,26 +168,23 @@ export default class CartsMap extends Component {
                     width="200px"
                   />
                   <br />
-                  <h4>
-                    {this.state.cartReviews.length > 0
-                      ? this.state.cartReviews.map(
+                  {/* <h4>
+                    {this.state.activeMarker.reviews.length > 0
+                      ? this.state.activeMarker.reviews.map(
                           cartReview => cartReview.stars
                         )
                       : null}
                   </h4>
                   <h4>
-                    {this.state.cartReviews.map(
+                    {
+                      this.state.activeMarker.reviews.map(
                       cartReview => cartReview.content
                     )}
-                  </h4>
+                  </h4> */}
                   <button onClick={() => this.setModalShow(true)}>
                     Add Review
                   </button>
-                  <ul>
-                    {
-                      this.state.activeMarker.reviews.map(review => <li>{review.content}: {review.stars} ⭐️'s</li>)
-                    }
-                  </ul>
+                  <DisplayReview reviews={this.state.cartReviews}/>
                 </div>
               </InfoWindow>
             ) : null}
@@ -180,9 +194,13 @@ export default class CartsMap extends Component {
               name={this.state.activeMarker.name}
               show={this.state.modalShow}
               onHide={() => this.setModalShow(false)}
+              addReview={this.onReviewFormSubmit}
             />
-            <ReviewForm user_id={this.props.current_user.id}
-            cart_id={this.state.activeMarker.id} />
+            <ReviewForm
+              user_id={this.props.current_user.id}
+              cart_id={this.state.activeMarker.id}
+              addReview={this.onReviewFormSubmit}
+            />
           </GoogleMap>
         </LoadScript>
       </div>

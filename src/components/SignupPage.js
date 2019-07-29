@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 
-export default class SignupPage extends React.Component {
+
+export default class SignupPage extends Component {
   state = {
     name: "",
     username: "",
@@ -16,8 +17,7 @@ export default class SignupPage extends React.Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.token}`
+        Accept: "application/json"
       },
       body: JSON.stringify(newUser)
     })
