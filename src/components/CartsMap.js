@@ -9,8 +9,11 @@ import FoodTruckIcon from "../foodTruck.png";
 import ReviewFormModal from "./ReviewFormModal";
 import ReviewForm from "./ReviewForm";
 import DisplayReview from "./DisplayReview";
+import AddCartForm from "./AddCartForm";
+import AddCartModal from "./AddCartModal";
 
 const cartAPI = "http://localhost:3000/carts";
+const cuisineAPI = "http://localhost:3000/cuisines";
 
 export default class CartsMap extends Component {
   state = {
@@ -20,7 +23,9 @@ export default class CartsMap extends Component {
     showingInfoWindow: false,
     cuisine: "",
     modalShow: false,
-    cartReviews: []
+    cartReviews: [],
+    modalCartShow: false,
+    allCuisines: []
   };
 
   componentDidMount() {
@@ -30,6 +35,12 @@ export default class CartsMap extends Component {
         this.setState({
           carts: allCarts
         });
+      });
+
+    fetch(cuisineAPI)
+      .then(resp => resp.json())
+      .then(allCuisines => {
+        this.setState({ allCuisines: allCuisines });
       });
   }
 
@@ -54,7 +65,6 @@ export default class CartsMap extends Component {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false
-        // activeMarker: null
       });
     }
   };
@@ -65,6 +75,12 @@ export default class CartsMap extends Component {
     });
   };
 
+  setModalCartShow = boolean => {
+    this.setState({
+      modalCartShow: boolean
+    });
+  };
+
   getAvgStars = () => {
     let reviewStars = this.state.activeMarker.reviews.map(
       review => review.stars
@@ -72,18 +88,32 @@ export default class CartsMap extends Component {
     let total = reviewStars.reduce((acc, c) => acc + c, 0);
     if (total) {
       let avg = (total / reviewStars.length).toFixed(0);
-       return " ⭐".repeat(avg)
+      return " ⭐".repeat(avg);
     } else {
       return <i>This cart does not have any ratings. Add your review!</i>;
     }
   };
 
-  onReviewFormSubmit = (review) => {
+  onReviewFormSubmit = review => {
     this.setState({
       cartReviews: [...this.state.activeMarker.reviews, review],
       modalShow: false
-    })
-  }
+    });
+  };
+
+  onCartFormSubmit = cart => {
+    this.setState({
+      carts: [...this.state.carts, cart],
+      modalCartShow: false
+    });
+  };
+
+  // handleNewCart = newCart => {
+  //   this.setState({
+  //     carts: [...this.state.carts, newCart],
+  //     modalCartShow: false
+  //   })
+  // }
 
   render() {
     let newMarkers = this.state.carts.map(cart => {
@@ -119,6 +149,7 @@ export default class CartsMap extends Component {
         <button onClick={() => this.props.logOut(this.props.history)}>
           Log Out
         </button>
+        <button onClick={() => this.setModalCartShow(true)}>Add Cart</button>
         <LoadScript
           id="script-loader"
           googleMapsApiKey="AIzaSyC5nHpj9XSRXvvhnVfvctNk2abXrKHaD5Y"
@@ -168,23 +199,10 @@ export default class CartsMap extends Component {
                     width="200px"
                   />
                   <br />
-                  {/* <h4>
-                    {this.state.activeMarker.reviews.length > 0
-                      ? this.state.activeMarker.reviews.map(
-                          cartReview => cartReview.stars
-                        )
-                      : null}
-                  </h4>
-                  <h4>
-                    {
-                      this.state.activeMarker.reviews.map(
-                      cartReview => cartReview.content
-                    )}
-                  </h4> */}
                   <button onClick={() => this.setModalShow(true)}>
                     Add Review
                   </button>
-                  <DisplayReview reviews={this.state.cartReviews}/>
+                  <DisplayReview reviews={this.state.cartReviews} />
                 </div>
               </InfoWindow>
             ) : null}
@@ -200,6 +218,12 @@ export default class CartsMap extends Component {
               user_id={this.props.current_user.id}
               cart_id={this.state.activeMarker.id}
               addReview={this.onReviewFormSubmit}
+            />
+            <AddCartModal
+              show={this.state.modalCartShow}
+              onHide={() => this.setModalCartShow(false)}
+              allCuisines={this.state.allCuisines}
+              addCart={this.onCartFormSubmit}
             />
           </GoogleMap>
         </LoadScript>

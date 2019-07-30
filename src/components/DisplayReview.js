@@ -6,8 +6,8 @@ export default class DisplayReview extends Component {
       return (
         <li>
           <div>
-          <b>{review.user.name}</b> said: {review.content}:{" "}
-          {" ⭐".repeat(review.stars)}
+            <b>{review.user.name}</b> said: {review.content}:{" "}
+            {" ⭐".repeat(review.stars)}
           </div>
         </li>
       );
