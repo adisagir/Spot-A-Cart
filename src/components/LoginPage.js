@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Button from '@material/react-button';
+import { MDBBtn } from "mdbreact";
+import CartLogo from "../cartLogoBottom.png"
 import TextField, {Input} from '@material/react-text-field';
 
 export default class LoginPage extends Component {
@@ -77,8 +78,10 @@ export default class LoginPage extends Component {
             />
             </TextField>
             <br />
-            <Button type="submit" className="login">Sign In</Button> | <Button onClick={() => this.props.history.push("/signup")}className="signup">Sign Up</Button>
+            <MDBBtn type="submit" className="login">Sign In</MDBBtn> {" "} <MDBBtn onClick={() => this.props.history.push("/signup")}className="signup">Sign Up</MDBBtn>
+            <br />
           </form>
+          <img src={CartLogo} alt="logo" align="center" />
         </div>
       </div>
     );

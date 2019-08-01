@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from "@material/react-button";
+import { MDBBtn } from "mdbreact";
 import TextField, { Input } from "@material/react-text-field";
 
 export default class SignupPage extends Component {
@@ -91,9 +91,9 @@ export default class SignupPage extends Component {
               />
             </TextField>
             <br />
-            <Button type="submit" value="Sign Up!">
+            <MDBBtn type="submit" value="Sign Up!">
               Sign Up
-            </Button>
+            </MDBBtn>
           </form>{" "}
         </div>{" "}
       </div>

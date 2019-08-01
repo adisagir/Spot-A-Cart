@@ -3,36 +3,37 @@ import "semantic-ui-css/semantic.min.css";
 import { Segment, Grid, Image } from "semantic-ui-react";
 import CartMap from "./CartsMap.js";
 import Button from "@material/react-button";
+import { MDBBtn } from "mdbreact";
 import "../App.css";
 
 const HomePage = props => {
   let displayHomePage = (
     <div align="center">
       {localStorage.token ? (
-        <div>
+        <div style={{color:"white"}}>
           <h1>Welcome, {props.name}!</h1>
           <img src={props.image} height="200px" width="200px" alt="Profile" />
         </div>
       ) : (
-        <Segment className="welcome">
-          <h1 align="center">Welcome to Spot-A-Cart!</h1>
-          <h3 align="center">
+        <Segment className="welcome" align="center" style={{backgroundColor:"#348e41", color:"white"}}>
+          <h1>Welcome to Spot-A-Cart!</h1>
+          <h3>
             <i>Find Food Carts Near You</i>
           </h3>
-          <Button
+          <MDBBtn
             type="submit"
             className="login"
             onClick={() => props.history.push("/login")}
           >
             Sign In
-          </Button>{" "}
-          |{" "}
-          <Button
+          </MDBBtn>{" "}
+          {" "}
+          <MDBBtn
             onClick={() => props.history.push("/signup")}
             className="signup"
           >
             Sign Up
-          </Button>
+          </MDBBtn>
         </Segment>
       )}
     </div>

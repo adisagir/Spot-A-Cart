@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Button from '@material/react-button';
-import TextField, {Input} from '@material/react-text-field';
-import Select, {Option} from '@material/react-select';
+import Button from "@material/react-button";
+import TextField, { Input } from "@material/react-text-field";
+import Select, { Option } from "@material/react-select";
 
 const cartsAPI = "http://localhost:3000/carts";
 
@@ -57,58 +57,60 @@ export default class AddCartForm extends Component {
         <form onSubmit={this.handleFormSubmit}>
           <br />
           <TextField label="Name">
-          <Input
-            type="text"
-            name="name"
-            onChange={this.handleFormChange}
-            value={this.state.name}
-            required
-          />
+            <Input
+              type="text"
+              name="name"
+              onChange={this.handleFormChange}
+              value={this.state.name}
+              required
+            />
           </TextField>
           <br />
           <TextField label="Address">
-          <Input
-            type="text"
-            name="address"
-            onChange={this.handleFormChange}
-            value={this.state.address}
-            required
-          />
+            <Input
+              type="text"
+              name="address"
+              onChange={this.handleFormChange}
+              value={this.state.address}
+              required
+            />
           </TextField>
           <br />
           <TextField label="Cart Image">
-          <Input
-            type="text"
-            alt="Cart"
-            name="image_url"
-            onChange={this.handleFormChange}
-            value={this.state.image_url}
-          />
+            <Input
+              type="text"
+              alt="Cart"
+              name="image_url"
+              onChange={this.handleFormChange}
+              value={this.state.image_url}
+            />
           </TextField>
           <br />
           <TextField label="Website">
-          <Input
-            type="text"
-            name="website_url"
-            onChange={this.handleFormChange}
-            value={this.state.website_url}
-          />
+            <Input
+              type="text"
+              name="website_url"
+              onChange={this.handleFormChange}
+              value={this.state.website_url}
+            />
           </TextField>
           <br />
           <TextField label="Menu">
-          <Input
-            type="text"
-            name="menu_url"
-            onChange={this.handleFormChange}
-            value={this.state.menu_url}
-          />
+            <Input
+              type="text"
+              name="menu_url"
+              onChange={this.handleFormChange}
+              value={this.state.menu_url}
+            />
           </TextField>
           <br />
-          <Select label="Cuisine"
+          <Select
+            label="Cuisine"
             name="cuisine_id"
             onChange={this.handleFormChange}
-            value={this.state.cuisine_id} 
+            value={this.state.cuisine_id}
           >
+            <Option disabled selected value="" />
             {allCuisines && allCuisines.length > 0
               ? allCuisines.map(cuisines => (
                   <Option value={cuisines.id}>{cuisines.name}</Option>
@@ -116,7 +118,9 @@ export default class AddCartForm extends Component {
               : null}
           </Select>
           <br />
-          <Button type="submit" name="submit">Submit</Button>
+          <Button type="submit" name="submit">
+            Submit
+          </Button>
         </form>
       </div>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Button from "@material/react-button";
+import { MDBBtn } from "mdbreact";
 import {
   GoogleMap,
   LoadScript,
@@ -32,6 +33,7 @@ export default class CartsMap extends Component {
     locationShow: false
   };
 
+  // --- Using geolocation to get users current position ---
   showCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -48,6 +50,7 @@ export default class CartsMap extends Component {
     }
   };
 
+  // --- Fetching all the food carts and cuisines ---
   componentDidMount() {
     this.showCurrentLocation();
     fetch(cartAPI)
@@ -65,6 +68,7 @@ export default class CartsMap extends Component {
       });
   }
 
+  // --- On click for a marker on the map, setting the cart object to activeMarker and fetching names of cuisines for a specific cart ---
   onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
@@ -82,6 +86,7 @@ export default class CartsMap extends Component {
       });
   };
 
+  // --- Function allows you to close the InfoWindow ---
   onClose = props => {
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -90,18 +95,14 @@ export default class CartsMap extends Component {
     }
   };
 
+  // --- Toggles the Modal window for Adding a Review ---
   setModalShow = boolean => {
     this.setState({
       modalShow: boolean
     });
   };
 
-  setModalCartShow = boolean => {
-    this.setState({
-      modalCartShow: boolean
-    });
-  };
-
+  // --- Function to calculate the average stars for a cart from reviews ---
   getAvgStars = () => {
     let reviewStars = this.state.activeMarker.reviews.map(
       review => review.stars
@@ -115,6 +116,7 @@ export default class CartsMap extends Component {
     }
   };
 
+  // --- Function handling submitting reviews, being passed down as props to ReviewFormModal ---
   onReviewFormSubmit = review => {
     fetch(`http://localhost:3000/carts/${this.state.activeMarker.id}`)
       .then(resp => resp.json())
@@ -135,6 +137,7 @@ export default class CartsMap extends Component {
     });
   };
 
+  // --- Function sets new state for all carts when AddCartForm is submitted, being passed as props to AddCartModal ---
   onCartFormSubmit = cart => {
     this.setState({
       carts: [...this.state.carts, cart],
@@ -142,17 +145,15 @@ export default class CartsMap extends Component {
     });
   };
 
-  handleLocationError = (browserHasGeolocation, infoWindow, pos) => {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(
-      browserHasGeolocation
-        ? "Error: The Geolocation service failed."
-        : "Error: Your browser doesn't support geolocation."
-    );
-    infoWindow.open(GoogleMap);
+  // --- Toggles the Modal window for Adding a Cart ---
+  setModalCartShow = boolean => {
+    this.setState({
+      modalCartShow: boolean
+    });
   };
 
   render() {
+    // --- Creating markers based on the lat and lng and setting state of cartReviews when the marker is clicked ---
     const mapStyle = [
       {
         elementType: "geometry",
@@ -423,17 +424,24 @@ export default class CartsMap extends Component {
       );
     });
     return (
-      <div>
+      <div style={{backgroundColor:"#348e89"}}>
         {this.props.displayHomePage}
         {console.log(this.props)}
         {localStorage.token ? (
-          <div>
-            <Button onClick={() => this.props.logOut(this.props.history)}>
+          <div align="center">
+            <MDBBtn
+              color="dark-green"
+              onClick={() => this.props.logOut(this.props.history)}
+            >
               Log Out
-            </Button>
-            <Button onClick={() => this.setModalCartShow(true)}>
+            </MDBBtn>
+            |
+            <MDBBtn
+              color="dark-green"
+              onClick={() => this.setModalCartShow(true)}
+            >
               Add Cart
-            </Button>
+            </MDBBtn>
           </div>
         ) : null}
         <LoadScript
@@ -496,11 +504,16 @@ export default class CartsMap extends Component {
                   />
                   <br />
                   {localStorage.token ? (
-                    <Button onClick={() => this.setModalShow(true)}>
+                    <MDBBtn
+                      color="dark-green"
+                      onClick={() => this.setModalShow(true)}
+                    >
                       Add Review
-                    </Button>
+                    </MDBBtn>
                   ) : null}
-                  <div align="left"><DisplayReview reviews={this.state.activeMarker.reviews} /></div>
+                  <div align="left">
+                    <DisplayReview reviews={this.state.activeMarker.reviews} />
+                  </div>
                 </div>
               </InfoWindow>
             ) : null}
