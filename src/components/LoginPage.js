@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "../App.css";
+import Button from '@material/react-button';
+import TextField, {Input} from '@material/react-text-field';
 
 export default class LoginPage extends Component {
   state = {
@@ -53,27 +54,30 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      <div align="center">
         <div className="login">
           <form onSubmit={this.handleSubmit}>
-            Username{" "}
-            <input
+            <TextField label="Username">
+            <Input
               type="text"
               value={this.state.username}
               onChange={this.handleChange}
               name="username"
               placeholder="Username"
             />
-            Password{" "}
-            <input
+            </TextField>
+            <br />
+            <TextField label="Password">
+            <Input
               type="password"
               value={this.state.password}
               onChange={this.handleChange}
               name="password"
               placeholder="Password"
             />
+            </TextField>
             <br />
-            <input type="submit" value="Log In" className="loginButton" /> Or <button onClick={() => this.props.history.push("/signup")}className="signupButton">Sign Up</button>
+            <Button type="submit" className="login">Sign In</Button> | <Button onClick={() => this.props.history.push("/signup")}className="signup">Sign Up</Button>
           </form>
         </div>
       </div>

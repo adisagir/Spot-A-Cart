@@ -9,7 +9,7 @@ export default class AddCartModal extends Component {
       <div>
         <Modal
           {...this.props}
-          size="lg"
+          size="sm"
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
@@ -24,9 +24,6 @@ export default class AddCartModal extends Component {
               addCart={this.props.addCart}
             />
           </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.props.onHide}>Close</Button>
-          </Modal.Footer>
         </Modal>
       </div>
     );

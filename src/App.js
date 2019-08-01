@@ -1,4 +1,8 @@
 import "bootstrap/dist/css/bootstrap.css";
+import "@material/react-button/dist/button.css";
+import "@material/react-text-field/dist/text-field.css";
+import "@material/react-select/dist/select.css";
+import 'mdbreact/dist/css/mdb.css';
 import React from "react";
 import "./App.css";
 import {
@@ -10,6 +14,7 @@ import {
 import LoginPage from "./components/LoginPage";
 import CartsMap from "./components/CartsMap";
 import SignupPage from "./components/SignupPage";
+import HomePage from "./components/HomePage";
 
 const profileAPI = "http://localhost:3000/profile";
 
@@ -51,7 +56,7 @@ export default class App extends React.Component {
       loggedIn: !this.state.loggedIn
     });
     localStorage.clear();
-    history.push("/login");
+    // history.push("/");
   };
 
   // --- Render to the browser with Routes ---
@@ -61,31 +66,39 @@ export default class App extends React.Component {
         {/* Route to the Map of Food Carts after logging in */}
         <Route
           exact
-          path="/"
-          render={routerProps => (
-            <CartsMap
-              current_user={this.state.current_user}
-              logIn={this.logIn}
-              {...routerProps}
-              logOut={this.logOut}
-              name={this.state.current_user.name}
-              image={this.state.current_user.picture}
-              review={this.state.reviews}
-            />
-          )}
+          path="/map"
+          render={routerProps =>
+            localStorage.token ? (
+              <CartsMap
+                current_user={this.state.current_user}
+                logIn={this.logIn}
+                {...routerProps}
+                logOut={this.logOut}
+                name={this.state.current_user.name}
+                image={this.state.current_user.picture}
+                review={this.state.reviews}
+              />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
         />
         {/* Route to the login page */}
         <Route
           exact
           path="/login"
-          render={routerProps => (
-            <LoginPage
-              logIn={this.logIn}
-              {...routerProps}
-              user_id={this.state.current_user.id}
-              name={this.state.current_user.name}
-            />
-          )}
+          render={routerProps =>
+            localStorage.token ? (
+              <Redirect to="/" />
+            ) : (
+              <LoginPage
+                logIn={this.logIn}
+                {...routerProps}
+                user_id={this.state.current_user.id}
+                name={this.state.current_user.name}
+              />
+            )
+          }
         />
         {/* Route to the sign-up page, if already logged in then redirect to Map of Food Carts */}
         <Route
@@ -98,6 +111,22 @@ export default class App extends React.Component {
               <SignupPage logIn={this.logIn} {...routerProps} />
             )
           }
+        />
+        {/* Route to the Map of Food Carts not logged in */}
+        <Route
+          exact
+          path="/"
+          render={routerProps => (
+            <HomePage
+              current_user={this.state.current_user}
+              logIn={this.logIn}
+              {...routerProps}
+              logOut={this.logOut}
+              name={this.state.current_user.name}
+              image={this.state.current_user.picture}
+              review={this.state.reviews}
+            />
+          )}
         />
       </Switch>
     );

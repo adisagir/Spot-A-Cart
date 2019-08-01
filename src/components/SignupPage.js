@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import Button from "@material/react-button";
+import TextField, { Input } from "@material/react-text-field";
 
 export default class SignupPage extends Component {
   state = {
@@ -39,49 +40,60 @@ export default class SignupPage extends Component {
   render() {
     return (
       <div>
-        <div className="login">
+        <div className="login" align="center">
           <form onSubmit={this.handleSubmit}>
-            Name{" "}
-            <input
-              type="text"
-              value={this.state.name}
-              onChange={this.handleChange}
-              name="name"
-            />
+            <TextField label="Name">
+              <Input
+                type="text"
+                value={this.state.name}
+                onChange={this.handleChange}
+                name="name"
+                required
+              />
+            </TextField>
             <br />
-            Username{" "}
-            <input
-              type="text"
-              value={this.state.username}
-              onChange={this.handleChange}
-              name="username"
-            />
+            <TextField label="Username">
+              <Input
+                type="text"
+                value={this.state.username}
+                onChange={this.handleChange}
+                name="username"
+                required
+              />
+            </TextField>
             <br />
-            Password{" "}
-            <input
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              name="password"
-            />
+            <TextField label="Password">
+              <Input
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                name="password"
+                required
+              />
+            </TextField>
             <br />
-            Email{" "}
-            <input
-              type="text"
-              value={this.state.email}
-              onChange={this.handleChange}
-              name="email"
-            />
+            <TextField label="Email">
+              <Input
+                type="text"
+                value={this.state.email}
+                onChange={this.handleChange}
+                name="email"
+              />
+            </TextField>
             <br />
-            Picture{" "}
-            <input
-              type="url"
-              value={this.state.picture}
-              onChange={this.handleChange}
-              name="picture"
-            />
+            <TextField label="Picture">
+              <Input
+                type="url"
+                value={this.state.picture}
+                onChange={this.handleChange}
+                name="picture"
+                placeholder="Link to Picture"
+              />
+            </TextField>
             <br />
-            <input type="submit" value="Sign Up!" />
+            <Button type="submit" value="Sign Up!">
+              Sign Up
+            </Button>
           </form>{" "}
         </div>{" "}
       </div>

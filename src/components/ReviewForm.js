@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Button from "@material/react-button";
+import { MDBInput } from "mdbreact";
 
 const reviewAPI = "http://localhost:3000/reviews";
 
@@ -41,13 +43,15 @@ export default class ReviewForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleFormSubmit}>
-          Your Review:
           <br />
-          <textarea
-            type="text"
+          <MDBInput
+            type="textarea"
+            label="Add Your Review"
+            rows="4"
             name="content"
             onChange={this.handleFormChange}
             value={this.state.content}
+            required
           />
           <br />
           Your Star Rating
@@ -62,9 +66,12 @@ export default class ReviewForm extends Component {
             name="stars"
             onChange={this.handleFormChange}
             value={this.state.stars}
+            required
           />
           <br />
-          <input type="submit" name="submit" />
+          <Button type="submit" name="submit">
+            Submit
+          </Button>
         </form>
       </div>
     );

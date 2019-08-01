@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Button from '@material/react-button';
+import TextField, {Input} from '@material/react-text-field';
+import Select, {Option} from '@material/react-select';
 
 const cartsAPI = "http://localhost:3000/carts";
 
@@ -52,67 +55,68 @@ export default class AddCartForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleFormSubmit}>
-          Name:
           <br />
-          <input
+          <TextField label="Name">
+          <Input
             type="text"
             name="name"
             onChange={this.handleFormChange}
             value={this.state.name}
+            required
           />
+          </TextField>
           <br />
-          Address
-          <br />
-          <input
+          <TextField label="Address">
+          <Input
             type="text"
             name="address"
             onChange={this.handleFormChange}
             value={this.state.address}
+            required
           />
+          </TextField>
           <br />
-          Cart Image Link
-          <br />
-          <input
+          <TextField label="Cart Image">
+          <Input
             type="text"
             alt="Cart"
             name="image_url"
             onChange={this.handleFormChange}
             value={this.state.image_url}
           />
+          </TextField>
           <br />
-          Website Link
-          <br />
-          <input
+          <TextField label="Website">
+          <Input
             type="text"
             name="website_url"
             onChange={this.handleFormChange}
             value={this.state.website_url}
           />
+          </TextField>
           <br />
-          Menu Image Link
-          <br />
-          <input
+          <TextField label="Menu">
+          <Input
             type="text"
             name="menu_url"
             onChange={this.handleFormChange}
             value={this.state.menu_url}
           />
+          </TextField>
           <br />
-          Cuisine
-          <br />
-          <select
+          <Select label="Cuisine"
             name="cuisine_id"
             onChange={this.handleFormChange}
-            value={this.state.cuisine_id}
+            value={this.state.cuisine_id} 
           >
             {allCuisines && allCuisines.length > 0
               ? allCuisines.map(cuisines => (
-                  <option value={cuisines.id}>{cuisines.name}</option>
+                  <Option value={cuisines.id}>{cuisines.name}</Option>
                 ))
               : null}
-          </select>
+          </Select>
           <br />
-          <input type="submit" name="submit" />
+          <Button type="submit" name="submit">Submit</Button>
         </form>
       </div>
     );

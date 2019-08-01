@@ -13,6 +13,6 @@ export default class DisplayReview extends Component {
       );
     });
 
-    return <ul>{specficReviews}</ul>;
+    return <ul style={{listStyleType: "none"}}>{specficReviews}</ul>;
   }
 }
