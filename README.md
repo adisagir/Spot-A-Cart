@@ -1,69 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Spot-A-Cart README
 
-## Available Scripts
+<img src="https://imgur.com/a/j5T9rB7" alt="customize" width="700"/>
 
-In the project directory, you can run:
+## Description
+A web application that allows users to find food carts near their location and leave reviews about the carts. Users can also add new food carts to the app. When logged out users can only view food carts and read reviews, but are not able to write reviews or add a new food cart. Once logged in, users can write reviews of food carts and add new food carts.
 
-### `npm start`
+## Technologies Used
+- ReactJS
+- Rails
+- JWT Authorization
+- Google Maps API
+- CSS
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Browsing The Map
+To get the most out of Spot-A-Cart users must enable location sharing on their browser.
+<img src="https://imgur.com/Z70lRzY" alt="customize" width="700"/>
 
-### `npm test`
+### Viewing Cart Details
+After a user has enabled location services, they can see which carts are closest to their location. Clicking on the cart brings up additional details. 
+<img src="https://media.giphy.com/media/YPzgsWOelikaU21cbL/giphy.gif" alt="customize" width="700"/>
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Sign Up
+Users can sign up to Spot-A-Cart by entering the required fields (name, username, and password). If a required field is missing an error msg will display. 
+<img src="https://media.giphy.com/media/gkQjUKkcnyXZh0i9HU/giphy.gif" alt="customize" width="700"/>
 
-### `npm run build`
+### Reviews
+After clicking on a cart, logged in users can leave a review for that food cart. They can leave a review by typing in their comments and use a sliding scale to leave a numerical rating.
+<img src="https://media.giphy.com/media/mCPqZF9riiAUH9h6mR/giphy.gif" alt="customize" width="700"/>
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-# mod5-frontend
+### Add a Cart
+Logged in users are able to add carts to Spot-A-Cart. Since we have not listed every food cart in existence, a great way to build it out will be through crowd sourcing. Only required fields are Name and Address however users can enter more detailed information like Menu and Cuisine.
+<img src="https://media.giphy.com/media/YPtcF2FI5nTdrdFyYv/giphy.gif" alt="customize" width="700"/>
