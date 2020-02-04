@@ -16,10 +16,10 @@ A web application that allows users to find food carts near their location and l
 
 ### Browsing The Map
 To get the most out of Spot-A-Cart users must enable location sharing on their browser.
-<img src="https://imgur.com/Z70lRzY" alt="map" width="700"/>
+<img src="https://i.imgur.com/Z70lRzY.png" alt="map" width="700"/>
 
 ### Viewing Cart Details
-After a user has enabled location services, they can see which carts are closest to their location. Clicking on the cart brings up additional details. 
+After a user has enabled location services, they can see which carts are closest to their location. Clicking on the cart brings up additional details. <br>
 <img src="https://media.giphy.com/media/YPzgsWOelikaU21cbL/giphy.gif" alt="details" width="700"/>
 
 ### Sign Up
