@@ -1,6 +1,6 @@
 # Spot-A-Cart README
 
-<img src="https://imgur.com/a/j5T9rB7" alt="customize" width="700"/>
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/j5T9rB7"><a href="//imgur.com/a/j5T9rB7"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 ## Description
 A web application that allows users to find food carts near their location and leave reviews about the carts. Users can also add new food carts to the app. When logged out users can only view food carts and read reviews, but are not able to write reviews or add a new food cart. Once logged in, users can write reviews of food carts and add new food carts.
